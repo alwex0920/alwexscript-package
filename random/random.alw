@@ -3,12 +3,12 @@ func randint
     let temp1 = max - min
     let range = temp1 + 1
     let temp2 = __rand_internal % range
-    let result = min + temp2
+    let randint_result = min + temp2
 end
 
 func random_float
     let __rand_internal = 0
-    let result = __rand_internal / 32768.0
+    let random_float_result = __rand_internal / 32768.0
 end
 
 func choice
@@ -16,5 +16,5 @@ func choice
     let __rand_internal = 0
     let idx = __rand_internal % arr_length_result
     arr_get arr idx
-    let result = arr_get_result
+    let choice_result = arr_get_result
 end
