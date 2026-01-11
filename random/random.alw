@@ -1,8 +1,7 @@
-# randint min max
 func randint
     let __rand_internal = 0
-    let range = max minus min plus 1
-    let result = min plus __rand_internal % range
+    let range = max - min + 1
+    let result = min + __rand_internal % range
 end
 
 func random_float
@@ -10,14 +9,6 @@ func random_float
     let result = __rand_internal / 32768
 end
 
-# random
-func random
-    let rand_val = __rand_internal
-    let result = rand_val / 32767.0
-    let random_result = result
-end
-
-# choice arr
 func choice
     let __rand_internal = 0
     arr_length arr
