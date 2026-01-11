@@ -1,7 +1,7 @@
 {
   "name": "random",
-  "version": "1.0.0",
-  "description": "Библиотека для работы со случайными числами",
+  "version": "1.0.1",
+  "description": "Random number generation library",
   "author": "alwex0920",
   "license": "MIT",
   "dependencies": []
