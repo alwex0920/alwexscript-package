@@ -8,7 +8,7 @@ end
 
 func random
     let __rand_internal = 0
-    let random_float_result = __rand_internal / 32768.0
+    let random_result = __rand_internal / 32768.0
 end
 
 func choice
