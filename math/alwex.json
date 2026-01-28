@@ -1,0 +1,8 @@
+{
+  "name": "math",
+  "version": "1.0.0",
+  "description": "Math Library",
+  "author": "alwex0920",
+  "license": "MIT",
+  "dependencies": []
+}
