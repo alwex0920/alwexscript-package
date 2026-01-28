@@ -1,0 +1,644 @@
+# ========== MATHEMATICAL CONSTANTS ==========
+let PI = 3.14159265358979323846
+let E = 2.71828182845904523536
+let TAU = 6.28318530717958647692
+
+# ========== BASIC UTILITY FUNCTIONS ==========
+
+func abs
+    if x < 0
+        let abs_result = 0 - x
+    else
+        let abs_result = x
+    end
+end
+
+func max
+    if a > b
+        let max_result = a
+    else
+        let max_result = b
+    end
+end
+
+func min
+    if a < b
+        let min_result = a
+    else
+        let min_result = b
+    end
+end
+
+func floor
+    let int_part = x
+    if x < 0
+        let int_part = int_part - 1
+    end
+    let floor_result = int_part
+end
+
+func ceil
+    let int_part = x
+    let frac = x - int_part
+    if frac > 0
+        let int_part = int_part + 1
+    end
+    let ceil_result = int_part
+end
+
+func round
+    let int_part = x
+    let frac = x - int_part
+    
+    if frac >= 0.5
+        let round_result = int_part + 1
+    else
+        let round_result = int_part
+    end
+end
+
+# ========== POWER FUNCTIONS ==========
+
+func pow
+    if exponent == 0
+        let pow_result = 1
+        break
+    end
+    
+    if base == 0
+        let pow_result = 0
+        break
+    end
+    
+    let is_negative = 0
+    let exp_abs = exponent
+    
+    if exponent < 0
+        let is_negative = 1
+        let exp_abs = 0 - exponent
+    end
+    
+    let result = 1
+    let i = 0
+    
+    while i < exp_abs
+        let result = result * base
+        i++
+    endloop
+    
+    if is_negative == 1
+        let pow_result = 1 / result
+    else
+        let pow_result = result
+    end
+end
+
+func pow_fast
+    if exponent == 0
+        let pow_fast_result = 1
+        break
+    end
+    
+    if base == 0
+        let pow_fast_result = 0
+        break
+    end
+    
+    let result = 1
+    let current_base = base
+    let current_exp = exponent
+    
+    while current_exp > 0
+        let remainder = current_exp % 2
+        if remainder == 1
+            let result = result * current_base
+        end
+        
+        let current_base = current_base * current_base
+        let current_exp = current_exp / 2
+    endloop
+    
+    let pow_fast_result = result
+end
+
+func square
+    let square_result = x * x
+end
+
+func cube
+    let cube_result = x * x * x
+end
+
+func sqrt
+    if x < 0
+        let sqrt_result = -1
+        break
+    end
+    
+    if x == 0
+        let sqrt_result = 0
+        break
+    end
+    
+    let guess = x / 2
+    let epsilon = 0.00001
+    let i = 0
+    
+    while i < 100
+        let new_guess = (guess + x / guess) / 2
+        let diff = guess - new_guess
+        
+        if diff < 0
+            let diff = 0 - diff
+        end
+        
+        if diff < epsilon
+            break
+        end
+        
+        let guess = new_guess
+        i++
+    endloop
+    
+    let sqrt_result = guess
+end
+
+func cbrt
+    let is_negative = 0
+    let x_work = x
+    
+    if x < 0
+        let is_negative = 1
+        let x_work = 0 - x
+    end
+    
+    if x_work == 0
+        let cbrt_result = 0
+        break
+    end
+    
+    let guess = x_work / 3
+    let epsilon = 0.00001
+    let i = 0
+    
+    while i < 100
+        let guess_sq = guess * guess
+        let new_guess = (2 * guess + x_work / guess_sq) / 3
+        
+        let diff = guess - new_guess
+        if diff < 0
+            let diff = 0 - diff
+        end
+        
+        if diff < epsilon
+            break
+        end
+        
+        let guess = new_guess
+        i++
+    endloop
+    
+    if is_negative == 1
+        let cbrt_result = 0 - guess
+    else
+        let cbrt_result = guess
+    end
+end
+
+# ========== TRIGONOMETRIC FUNCTIONS ==========
+
+func deg_to_rad
+    let deg_to_rad_result = degrees * PI / 180
+end
+
+func rad_to_deg
+    let rad_to_deg_result = radians * 180 / PI
+end
+
+func sin
+    let x_rad = x
+    
+    while x_rad > PI
+        let x_rad = x_rad - TAU
+    endloop
+    
+    while x_rad < 0 - PI
+        let x_rad = x_rad + TAU
+    endloop
+    
+    let result = x_rad
+    let term = x_rad
+    let i = 1
+    
+    while i < 15
+        let term = term * x_rad * x_rad / ((2 * i) * (2 * i + 1))
+        let term = 0 - term
+        let result = result + term
+        i++
+    endloop
+    
+    let sin_result = result
+end
+
+func cos
+    let x_shifted = x + PI / 2
+    let x_temp = x_shifted
+    let x = x_temp
+    call sin
+    let cos_result = sin_result
+end
+
+func tan
+    let x_temp = x
+    call sin
+    let sin_val = sin_result
+    
+    let x = x_temp
+    call cos
+    let cos_val = cos_result
+    
+    if cos_val == 0
+        let tan_result = 999999
+    else
+        let tan_result = sin_val / cos_val
+    end
+end
+
+func cot
+    let x_temp = x
+    call tan
+    if tan_result == 0
+        let cot_result = 999999
+    else
+        let cot_result = 1 / tan_result
+    end
+end
+
+func sec
+    let x_temp = x
+    call cos
+    if cos_result == 0
+        let sec_result = 999999
+    else
+        let sec_result = 1 / cos_result
+    end
+end
+
+func csc
+    let x_temp = x
+    call sin
+    if sin_result == 0
+        let csc_result = 999999
+    else
+        let csc_result = 1 / sin_result
+    end
+end
+
+# ========== INVERSE TRIGONOMETRIC FUNCTIONS ==========
+
+func asin
+    if x < -1
+        let asin_result = 0 - PI / 2
+        break
+    end
+    
+    if x > 1
+        let asin_result = PI / 2
+        break
+    end
+    
+    let guess = x
+    let i = 0
+    
+    while i < 20
+        let x_temp = guess
+        call sin
+        let f = sin_result - x
+        
+        let x = x_temp
+        call cos
+        let df = cos_result
+        
+        if df == 0
+            break
+        end
+        
+        let guess = guess - f / df
+        i++
+    endloop
+    
+    let asin_result = guess
+end
+
+func acos
+    let x_temp = x
+    call asin
+    let acos_result = PI / 2 - asin_result
+end
+
+func atan
+    if x > 1
+        let x_inv = 1 / x
+        let x_temp = x_inv
+        let x = x_temp
+        call atan
+        let atan_result = PI / 2 - atan_result
+        break
+    end
+    
+    if x < -1
+        let x_inv = 1 / x
+        let x_temp = x_inv
+        let x = x_temp
+        call atan
+        let atan_result = 0 - PI / 2 - atan_result
+        break
+    end
+    
+    let result = x
+    let term = x
+    let i = 1
+    
+    while i < 20
+        let term = term * x * x
+        let sign = -1
+        let mod = i % 2
+        if mod == 0
+            let sign = 1
+        end
+        let result = result + sign * term / (2 * i + 1)
+        i++
+    endloop
+    
+    let atan_result = result
+end
+
+# ========== RADIAN FORMATTING ==========
+
+func print_radians
+    let ratio = radians_value / PI
+    
+    let ratio_2 = ratio * 2
+    let ratio_3 = ratio * 3
+    let ratio_4 = ratio * 4
+    let ratio_6 = ratio * 6
+    
+    let found = 0
+    
+    if ratio_6 >= 0.95
+        if ratio_6 <= 1.05
+            print 'π/6'
+            let found = 1
+        end
+    end
+    
+    if found == 0
+        if ratio_4 >= 0.95
+            if ratio_4 <= 1.05
+                print 'π/4'
+                let found = 1
+            end
+        end
+    end
+    
+    if found == 0
+        if ratio_3 >= 0.95
+            if ratio_3 <= 1.05
+                print 'π/3'
+                let found = 1
+            end
+        end
+    end
+    
+    if found == 0
+        if ratio_2 >= 0.95
+            if ratio_2 <= 1.05
+                print 'π/2'
+                let found = 1
+            end
+        end
+    end
+    
+    if found == 0
+        if ratio_3 >= 1.95
+            if ratio_3 <= 2.05
+                print '2π/3'
+                let found = 1
+            end
+        end
+    end
+    
+    if found == 0
+        if ratio_4 >= 2.95
+            if ratio_4 <= 3.05
+                print '3π/4'
+                let found = 1
+            end
+        end
+    end
+    
+    if found == 0
+        if ratio_6 >= 4.95
+            if ratio_6 <= 5.05
+                print '5π/6'
+                let found = 1
+            end
+        end
+    end
+    
+    if found == 0
+        if ratio >= 0.95
+            if ratio <= 1.05
+                print 'π'
+                let found = 1
+            end
+        end
+    end
+    
+    if found == 0
+        if ratio_6 >= 6.95
+            if ratio_6 <= 7.05
+                print '7π/6'
+                let found = 1
+            end
+        end
+    end
+    
+    if found == 0
+        if ratio_4 >= 4.95
+            if ratio_4 <= 5.05
+                print '5π/4'
+                let found = 1
+            end
+        end
+    end
+    
+    if found == 0
+        if ratio_3 >= 3.95
+            if ratio_3 <= 4.05
+                print '4π/3'
+                let found = 1
+            end
+        end
+    end
+    
+    if found == 0
+        if ratio_2 >= 2.95
+            if ratio_2 <= 3.05
+                print '3π/2'
+                let found = 1
+            end
+        end
+    end
+    
+    if found == 0
+        if ratio_3 >= 4.95
+            if ratio_3 <= 5.05
+                print '5π/3'
+                let found = 1
+            end
+        end
+    end
+    
+    if found == 0
+        if ratio_4 >= 6.95
+            if ratio_4 <= 7.05
+                print '7π/4'
+                let found = 1
+            end
+        end
+    end
+    
+    if found == 0
+        if ratio_6 >= 10.95
+            if ratio_6 <= 11.05
+                print '11π/6'
+                let found = 1
+            end
+        end
+    end
+    
+    if found == 0
+        if ratio >= 1.95
+            if ratio <= 2.05
+                print '2π'
+                let found = 1
+            end
+        end
+    end
+    
+    if found == 0
+        print radians_value
+    end
+end
+
+# ========== LOGARITHMIC FUNCTIONS ==========
+
+func ln
+    if x <= 0
+        let ln_result = -999999
+        break
+    end
+    
+    if x == 1
+        let ln_result = 0
+        break
+    end
+    
+    let y = (x - 1) / (x + 1)
+    let y2 = y * y
+    let result = y
+    let term = y
+    let i = 1
+    
+    while i < 50
+        let term = term * y2
+        let result = result + term / (2 * i + 1)
+        i++
+    endloop
+    
+    let ln_result = 2 * result
+end
+
+func log10
+    let x_temp = x
+    call ln
+    let ln_x = ln_result
+    
+    let x = 10
+    call ln
+    let ln_10 = ln_result
+    
+    let log10_result = ln_x / ln_10
+end
+
+func log2
+    let x_temp = x
+    call ln
+    let ln_x = ln_result
+    
+    let x = 2
+    call ln
+    let ln_2 = ln_result
+    
+    let log2_result = ln_x / ln_2
+end
+
+func exp
+    let result = 1
+    let term = 1
+    let i = 1
+    
+    while i < 50
+        let term = term * x / i
+        let result = result + term
+        i++
+    endloop
+    
+    let exp_result = result
+end
+
+# ========== NUMBER THEORY ==========
+
+func factorial
+    if n < 0
+        let factorial_result = -1
+        break
+    end
+    
+    if n == 0
+        let factorial_result = 1
+        break
+    end
+    
+    let result = 1
+    let i = 1
+    
+    while i <= n
+        let result = result * i
+        i++
+    endloop
+    
+    let factorial_result = result
+end
+
+func gcd
+    let a_work = a
+    let b_work = b
+    
+    while b_work != 0
+        let temp = b_work
+        let b_work = a_work % b_work
+        let a_work = temp
+    endloop
+    
+    let gcd_result = a_work
+end
+
+func lcm
+    let a_temp = a
+    let b_temp = b
+    call gcd
+    let gcd_val = gcd_result
+    let lcm_result = (a_temp * b_temp) / gcd_val
+end
