@@ -642,3 +642,211 @@ func lcm
     let gcd_val = gcd_result
     let lcm_result = (a_temp * b_temp) / gcd_val
 end
+# ========== DOUBLE ANGLE FORMULAS ==========
+
+func sin_double_angle
+    let x_temp = x
+    call sin
+    let sin_val = sin_result
+    
+    let x = x_temp
+    call cos
+    let cos_val = cos_result
+    
+    let sin_double_angle_result = 2 * sin_val * cos_val
+end
+
+func cos_double_angle
+    let x_temp = x
+    call sin
+    let sin_val = sin_result
+    
+    let x = x_temp
+    call cos
+    let cos_val = cos_result
+    
+    let cos_double_angle_result = cos_val * cos_val - sin_val * sin_val
+end
+
+func tan_double_angle
+    let x_temp = x
+    call tan
+    let tan_val = tan_result
+    
+    let denominator = 1 - tan_val * tan_val
+    
+    if denominator == 0
+        let tan_double_angle_result = 999999
+    else
+        let tan_double_angle_result = (2 * tan_val) / denominator
+    end
+end
+
+func cot_double_angle
+    let x_temp = x
+    call cot
+    let cot_val = cot_result
+    
+    if cot_val == 0
+        let cot_double_angle_result = 999999
+    else
+        let numerator = cot_val * cot_val - 1
+        let cot_double_angle_result = numerator / (2 * cot_val)
+    end
+end
+
+# ========== FORMULAS FOR AMOUNT AND DIFFERENCE ==========
+
+func sin_sum
+    let x = angle_a
+    call sin
+    let sin_a = sin_result
+    
+    let x = angle_a
+    call cos
+    let cos_a = cos_result
+    
+    let x = angle_b
+    call sin
+    let sin_b = sin_result
+    
+    let x = angle_b
+    call cos
+    let cos_b = cos_result
+    
+    let sin_sum_result = sin_a * cos_b + cos_a * sin_b
+end
+
+func sin_diff
+    let x = angle_a
+    call sin
+    let sin_a = sin_result
+    
+    let x = angle_a
+    call cos
+    let cos_a = cos_result
+    
+    let x = angle_b
+    call sin
+    let sin_b = sin_result
+    
+    let x = angle_b
+    call cos
+    let cos_b = cos_result
+    
+    let sin_diff_result = sin_a * cos_b - cos_a * sin_b
+end
+
+func cos_sum
+    let x = angle_a
+    call sin
+    let sin_a = sin_result
+    
+    let x = angle_a
+    call cos
+    let cos_a = cos_result
+    
+    let x = angle_b
+    call sin
+    let sin_b = sin_result
+    
+    let x = angle_b
+    call cos
+    let cos_b = cos_result
+    
+    let cos_sum_result = cos_a * cos_b - sin_a * sin_b
+end
+
+func cos_diff
+    let x = angle_a
+    call sin
+    let sin_a = sin_result
+    
+    let x = angle_a
+    call cos
+    let cos_a = cos_result
+    
+    let x = angle_b
+    call sin
+    let sin_b = sin_result
+    
+    let x = angle_b
+    call cos
+    let cos_b = cos_result
+    
+    let cos_diff_result = cos_a * cos_b + sin_a * sin_b
+end
+
+func tan_sum
+    let x = angle_a
+    call tan
+    let tan_a = tan_result
+    
+    let x = angle_b
+    call tan
+    let tan_b = tan_result
+    
+    let denominator = 1 - tan_a * tan_b
+    
+    if denominator == 0
+        let tan_sum_result = 999999
+    else
+        let tan_sum_result = (tan_a + tan_b) / denominator
+    end
+end
+
+func tan_diff
+    let x = angle_a
+    call tan
+    let tan_a = tan_result
+    
+    let x = angle_b
+    call tan
+    let tan_b = tan_result
+    
+    let denominator = 1 + tan_a * tan_b
+    
+    if denominator == 0
+        let tan_diff_result = 999999
+    else
+        let tan_diff_result = (tan_a - tan_b) / denominator
+    end
+end
+
+func cot_sum
+    let x = angle_a
+    call cot
+    let cot_a = cot_result
+    
+    let x = angle_b
+    call cot
+    let cot_b = cot_result
+    
+    let denominator = cot_a + cot_b
+    
+    if denominator == 0
+        let cot_sum_result = 999999
+    else
+        let numerator = cot_a * cot_b - 1
+        let cot_sum_result = numerator / denominator
+    end
+end
+
+func cot_diff
+    let x = angle_a
+    call cot
+    let cot_a = cot_result
+    
+    let x = angle_b
+    call cot
+    let cot_b = cot_result
+    
+    let denominator = cot_b - cot_a
+    
+    if denominator == 0
+        let cot_diff_result = 999999
+    else
+        let numerator = cot_a * cot_b + 1
+        let cot_diff_result = numerator / denominator
+    end
+end
