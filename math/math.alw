@@ -242,9 +242,11 @@ end
 
 func cos
     let x_shifted = x + PI / 2
+    let x_save = x
     let x = x_shifted
     call sin
     let cos_result = sin_result
+    let x = x_save
 end
 
 func tan
@@ -306,15 +308,16 @@ func asin
         break
     end
     
+    let x_save = x
     let guess = x
     let i = 0
     
     while i < 20
-        let x_temp = guess
+        let x = guess
         call sin
-        let f = sin_result - x
+        let f = sin_result - x_save
         
-        let x = x_temp
+        let x = guess
         call cos
         let df = cos_result
         
@@ -327,30 +330,34 @@ func asin
     endloop
     
     let asin_result = guess
+    let x = x_save
 end
 
 func acos
     let x_temp = x
     call asin
     let acos_result = PI / 2 - asin_result
+    let x = x_temp
 end
 
 func atan
+    let x_save = x
+    
     if x > 1
         let x_inv = 1 / x
-        let x_temp = x_inv
-        let x = x_temp
+        let x = x_inv
         call atan
         let atan_result = PI / 2 - atan_result
+        let x = x_save
         break
     end
     
     if x < -1
         let x_inv = 1 / x
-        let x_temp = x_inv
-        let x = x_temp
+        let x = x_inv
         call atan
         let atan_result = 0 - PI / 2 - atan_result
+        let x = x_save
         break
     end
     
@@ -370,6 +377,7 @@ func atan
     endloop
     
     let atan_result = result
+    let x = x_save
 end
 
 # ========== LOGARITHMIC FUNCTIONS ==========
@@ -401,7 +409,7 @@ func ln
 end
 
 func log10
-    let x_temp = x
+    let x_save = x
     call ln
     let ln_x = ln_result
     
@@ -410,10 +418,11 @@ func log10
     let ln_10 = ln_result
     
     let log10_result = ln_x / ln_10
+    let x = x_save
 end
 
 func log2
-    let x_temp = x
+    let x_save = x
     call ln
     let ln_x = ln_result
     
@@ -422,6 +431,7 @@ func log2
     let ln_2 = ln_result
     
     let log2_result = ln_x / ln_2
+    let x = x_save
 end
 
 func exp
@@ -482,6 +492,7 @@ func lcm
     let gcd_val = gcd_result
     let lcm_result = (a_temp * b_temp) / gcd_val
 end
+
 # ========== DOUBLE ANGLE FORMULAS ==========
 
 func sin_double_angle
@@ -535,7 +546,7 @@ func cot_double_angle
     end
 end
 
-# ========== FORMULAS FOR AMOUNT AND DIFFERENCE ==========
+# ========== SUM AND DIFFERENCE FORMULAS ==========
 
 func sin_sum
     let x = angle_a
