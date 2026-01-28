@@ -242,8 +242,7 @@ end
 
 func cos
     let x_shifted = x + PI / 2
-    let x_temp = x_shifted
-    let x = x_temp
+    let x = x_shifted
     call sin
     let cos_result = sin_result
 end
