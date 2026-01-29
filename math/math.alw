@@ -216,6 +216,7 @@ func rad_to_deg
 end
 
 func sin
+    let sin_result = 0
     let x_rad = x
     
     while x_rad > PI
