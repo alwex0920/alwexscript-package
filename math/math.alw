@@ -412,10 +412,12 @@ func log10
     let x_save = x
     call ln
     let ln_x = ln_result
+
+    # let x = 10
+    # call ln
+    # let ln_10 = ln_result
     
-    let x = 10
-    call ln
-    let ln_10 = ln_result
+    let ln_10 = 2.302585092994046
     
     let log10_result = ln_x / ln_10
     let x = x_save
@@ -426,9 +428,11 @@ func log2
     call ln
     let ln_x = ln_result
     
-    let x = 2
-    call ln
-    let ln_2 = ln_result
+    # let x = 2
+    # call ln
+    # let ln_2 = ln_result
+    
+    let ln_2 = 0.6931471805599453
     
     let log2_result = ln_x / ln_2
     let x = x_save
@@ -490,7 +494,12 @@ func lcm
     let b_temp = b
     call gcd
     let gcd_val = gcd_result
-    let lcm_result = (a_temp * b_temp) / gcd_val
+    
+    if gcd_val == 0
+        let lcm_result = 0
+    else
+        let lcm_result = (a_temp * b_temp) / gcd_val
+    end
 end
 
 # ========== DOUBLE ANGLE FORMULAS ==========
