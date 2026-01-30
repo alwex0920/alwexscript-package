@@ -230,15 +230,17 @@ func sin
     let result = x_rad
     let term = x_rad
     let i = 1
+    let negative = 1
     
     while i < 15
         let term = term * x_rad * x_rad / ((2 * i) * (2 * i + 1))
         
-        let mod_result = i % 2
-        if mod_result == 1
+        if negative == 1
             let result = result - term
+            let negative = 0
         else
             let result = result + term
+            let negative = 1
         end
         
         i++
