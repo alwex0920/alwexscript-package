@@ -1,0 +1,7 @@
+{
+  "name": "json",
+  "version": "1.0.0",
+  "description": "Minimal JSON field extractor for AlwexScript",
+  "author": "Alwex Community",
+  "license": "MIT"
+}
